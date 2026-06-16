@@ -1,0 +1,9 @@
+If machine temperature exceeds 100°C:
+- Check cooling fan
+- Inspect airflow
+- Reduce machine load
+
+If vibration is critical:
+- Inspect bearings
+- Tighten loose components
+- Schedule maintenance immediately

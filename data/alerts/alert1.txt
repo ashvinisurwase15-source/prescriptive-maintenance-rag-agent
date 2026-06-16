@@ -1,0 +1,4 @@
+Machine ID: M101
+Temperature: 95°C
+Vibration: High
+Status: Warning

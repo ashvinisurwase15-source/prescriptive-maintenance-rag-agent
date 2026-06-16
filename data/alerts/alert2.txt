@@ -1,0 +1,4 @@
+Machine ID: M102
+Temperature: 110°C
+Vibration: Critical
+Status: Immediate Maintenance Required
