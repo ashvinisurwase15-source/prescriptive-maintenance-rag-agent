@@ -11,16 +11,10 @@ vector_store = Chroma(
     persist_directory="./chroma_db"
 )
 
-query = "What should I do when machine temperature is high?"
+def search_documents(query):
+    results = vector_store.similarity_search(
+        query=query,
+        k=2
+    )
 
-results = vector_store.similarity_search(
-    query=query,
-    k=2
-)
-
-print("\nTop Matching Results:\n")
-
-for i, doc in enumerate(results, start=1):
-    print(f"Result {i}:")
-    print(doc.page_content)
-    print("-" * 50)
+    return [doc.page_content for doc in results]
