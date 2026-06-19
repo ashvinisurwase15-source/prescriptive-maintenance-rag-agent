@@ -1,0 +1,1 @@
+Motor vibration exceeds safe limit. Inspect bearings and shaft alignment.

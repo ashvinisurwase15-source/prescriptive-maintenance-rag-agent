@@ -1,0 +1,1 @@
+Hydraulic pressure below threshold. Inspect hydraulic pump and replace damaged seals.
