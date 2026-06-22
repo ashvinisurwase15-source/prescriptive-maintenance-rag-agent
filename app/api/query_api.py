@@ -18,7 +18,10 @@ def query_documents(request: QueryRequest):
 
     context = "\n".join(results)
 
-    recommendation = "LLM temporarily disabled for testing"
+    recommendation = generate_llm_recommendation(
+        request.query,
+        context
+    )
 
     health = calculate_health_score(
         request.query
