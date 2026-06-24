@@ -7,6 +7,7 @@ from app.services.health_score import calculate_health_score
 from app.services.failure_risk import predict_failure_risk
 from app.services.priority_classifier import classify_priority
 from app.services.severity_classifier import classify_severity
+from app.services.machine_monitor import get_machine_status
 
 router = APIRouter()
 
@@ -17,11 +18,16 @@ def query_documents(request: QueryRequest):
     results = search_documents(request.query)
 
     context = "\n".join(results)
+    try:
+        recommendation = generate_llm_recommendation(
+            request.query,
+            context
+        )
 
-    recommendation = generate_llm_recommendation(
-        request.query,
-        context
-    )
+    except Exception as e:
+        recommendation = f"LLM service unavailable: {str(e)}"
+
+
 
     health = calculate_health_score(
         request.query
@@ -35,6 +41,7 @@ def query_documents(request: QueryRequest):
     severity = classify_severity(
         request.query
     )
+    machines = get_machine_status()
 
     return {
         "query": request.query,
@@ -42,6 +49,7 @@ def query_documents(request: QueryRequest):
         "failure_risk": failure_risk,
         "priority": priority,
         "severity": severity,
+        "machines": machines,
         "recommendation": recommendation,
         "results": results
     }
