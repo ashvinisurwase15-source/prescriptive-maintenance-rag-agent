@@ -1,19 +1,15 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-text = """
-Machine temperature exceeds 100 degrees.
-Check cooling fan.
-Inspect airflow.
-Reduce machine load.
-"""
 
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size=50,
-    chunk_overlap=10
-)
+def split_documents(documents):
 
-chunks = splitter.split_text(text)
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=500,
+        chunk_overlap=50
+    )
 
-for i, chunk in enumerate(chunks):
-    print(f"\nChunk {i+1}")
-    print(chunk)
+    chunks = splitter.split_documents(documents)
+
+    print(f"Created {len(chunks)} chunks")
+
+    return chunks
