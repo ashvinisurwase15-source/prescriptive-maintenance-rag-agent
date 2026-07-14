@@ -8,25 +8,23 @@ def hybrid_search(query):
     bm25_results = search_bm25(query)
 
     chroma_results = search_documents(query)
+
     combined_results = bm25_results + chroma_results
+
     unique_results = []
     seen = set()
+
     for result in combined_results:
         content = result.page_content
 
         if content not in seen:
             seen.add(content)
             unique_results.append(result)
-            
-            reranked_results = rerank_documents(query, unique_results)
 
-            top_results = select_top_k(reranked_results, k=3)
+    reranked_results = rerank_documents(query, unique_results)
 
-            log_query(query, len(top_results))
+    top_results = select_top_k(reranked_results, k=3)
 
-            return top_results
+    log_query(query, len(top_results))
 
-
-
-
-
+    return top_results
