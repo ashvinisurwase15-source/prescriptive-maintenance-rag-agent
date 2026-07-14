@@ -1,15 +1,21 @@
-def rerank_documents(query, documents):
-    query_words = set(query.lower().split())
+from sentence_transformers import CrossEncoder
 
-    scored_docs = []
+model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+
+
+def rerank_documents(query, documents):
+    pairs = []
 
     for doc in documents:
-        content_words = set(doc.page_content.lower().split())
+        pairs.append((query, doc.page_content))
 
-        score = len(query_words.intersection(content_words))
+    scores = model.predict(pairs)
 
-        scored_docs.append((score, doc))
+    scored_documents = list(zip(scores, documents))
 
-    scored_docs.sort(reverse=True, key=lambda x: x[0])
+    scored_documents.sort(
+        key=lambda x: x[0],
+        reverse=True
+    )
 
-    return [doc for score, doc in scored_docs]
+    return [doc for score, doc in scored_documents]

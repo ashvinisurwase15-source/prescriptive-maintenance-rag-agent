@@ -17,4 +17,4 @@ def search_documents(query):
         k=2
     )
 
-    return [doc.page_content for doc in results]
+    return results

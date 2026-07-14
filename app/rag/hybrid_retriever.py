@@ -9,13 +9,14 @@ def hybrid_search(query):
     combined_results = bm25_results + chroma_results
     unique_results = []
     seen = set()
-
     for result in combined_results:
-
         content = result.page_content
 
         if content not in seen:
             seen.add(content)
             unique_results.append(result)
-            reranked_results = rerank_documents(query, unique_results)
-            return reranked_results[:5]
+
+    reranked_results = rerank_documents(query, unique_results)
+
+    return reranked_results[:5]
+
