@@ -1,6 +1,7 @@
 from app.rag.bm25_retriever import search_bm25
 from app.rag.retriever import search_documents
 from app.rag.reranker import rerank_documents
+from app.rag.topk_selector import select_top_k
 
 def hybrid_search(query):
     bm25_results = search_bm25(query)
@@ -16,7 +17,12 @@ def hybrid_search(query):
             seen.add(content)
             unique_results.append(result)
 
-    reranked_results = rerank_documents(query, unique_results)
+            reranked_results = rerank_documents(query, unique_results)
 
-    return reranked_results[:5]
+            top_results = select_top_k(reranked_results, k=3)
+
+            return top_results
+
+
+
 
