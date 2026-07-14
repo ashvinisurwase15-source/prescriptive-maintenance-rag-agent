@@ -1,2 +1,8 @@
 2026-07-14 13:43:03.098952 | Query: machine vibration | Results: 1
 2026-07-14 14:37:49.940702 | Query: machine vibration | Results: 3
+2026-07-14 14:53:03.841243 | Query: machine vibration | Results: 3
+2026-07-14 15:06:58.467298 | Query: bearing failure | Results: 3
+2026-07-14 15:11:54.778049 | Query: bearing failure | Results: 3
+2026-07-14 15:14:19.966930 | Query: machine vibration | Results: 3
+2026-07-14 15:25:17.721901 | Query: machine vibration | Results: 3
+2026-07-14 16:14:53.640024 | Query: Machine vibration is high | Results: 3
